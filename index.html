@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank CRM</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div id="main">
-        
+        <div class="admin-login-form">
+            <div class="admin-login-form-container">
+
+                <form id="adminLoginForm" class="admin-form">
+                    <h2>Admin Login</h2>
+
+                    <input name="username" type="text" id="username" placeholder="Username" required />
+
+                    <input name="password" type="password" id="userpassword" placeholder="Password" required />
+
+                    <button type="submit">Login</button>
+                </form>
+
+
+                <p class="login-as-customer">
+                    Login as a customer
+                </p>
+
+            </div>
+        </div>
     </div>
+
+
     <script type="module" src="script.js"></script>
 </body>
+
 </html>
