@@ -26,21 +26,25 @@ function switchTabs() {
     let homeTab = document.querySelector('#homeTab');
     let addUserTab = document.querySelector('#addUserTab');
     let updateUserTab = document.querySelector('#updateUserTab');
+    let deleteUserTab = document.querySelector('#deleteUserTab');
 
     // content 
     let homeContent = document.querySelector('.content');
     let addUserContent = document.querySelector('.addUserSection');
     let updateUserSection = document.querySelector('.updateUserSection');
+    let deleteUserSection = document.querySelector('.deleteUserSection');
 
     // helper: sab hide karo
     function hideAllSections() {
         homeContent.style.display = "none";
         addUserContent.style.display = "none";
         updateUserSection.style.display = "none";
+        deleteUserSection.style.display = "none";
 
         homeTab.classList.remove("active");
         addUserTab.classList.remove("active");
         updateUserTab.classList.remove("active");
+        deleteUserTab.classList.remove("active");
     }
 
     // Add User Tab
@@ -63,7 +67,15 @@ function switchTabs() {
         updateUserTab.classList.add("active");
         updateUserSection.style.display = "flex";
     });
+
+    // Delete User Tab  🔥
+    deleteUserTab.addEventListener("click", function () {
+        hideAllSections();
+        deleteUserTab.classList.add("active");
+        deleteUserSection.style.display = "flex";
+    });
 }
+
 
 
 switchTabs()
@@ -408,7 +420,7 @@ function addUser() {
                     );
                     if (homeRow) {
                         homeRow.children[0].textContent = userData.fullName; // name
-                        
+
                     }
 
                     // 4. Update Update-User tab row
@@ -419,7 +431,7 @@ function addUser() {
                         updateRow.children[0].textContent = userData.fullName; // updateName
                     }
 
-                    
+
                     const viewContainer = document.querySelector('.update-members-container.viewUser');
                     if (viewContainer) {
                         const spans = viewContainer.querySelectorAll(".view-model span");
@@ -438,6 +450,72 @@ function addUser() {
 
 
             //! edit user logic 
+
+            //! adding user in delete tab
+
+            // container jisme rows append hongi
+            let deleteMembersContainer = document.querySelector(".delete-members-container");
+
+            // row create karo
+            let deleteMemberRow = document.createElement("div");
+            deleteMemberRow.classList.add("delete-member-row");
+
+            // name
+            let nameSpan = document.createElement("span");
+            nameSpan.innerText = userData.fullName;
+
+            // user id
+            let userIdSpan = document.createElement("span");
+            userIdSpan.innerText = userData.id;
+
+            // status
+            let statusSpan = document.createElement("span");
+            statusSpan.classList.add("status", "active");
+            
+            if (userData.status == "active") {
+                statusSpan.textContent = "Active";
+            } else {
+                statusSpan.textContent = "Blocked";
+                statusSpan.style.color = "#ff6b6b"
+            }
+
+            // action div
+            let deleteActionDiv = document.createElement("div");
+            deleteActionDiv.classList.add("deleteAction");
+
+            // delete button
+            let deleteBtn = document.createElement("button");
+            deleteBtn.id = "deleteUser";
+            deleteBtn.innerText = "Delete";
+
+            // structure build karo
+            deleteActionDiv.appendChild(deleteBtn);
+
+            deleteMemberRow.appendChild(nameSpan);
+            deleteMemberRow.appendChild(userIdSpan);
+            deleteMemberRow.appendChild(statusSpan);
+            deleteMemberRow.appendChild(deleteActionDiv);
+
+            // finally container me append karo
+            deleteMembersContainer.appendChild(deleteMemberRow);
+
+            //! here we are deleing users 
+
+            deleteBtn.addEventListener('click',function(){
+                console.log("delete kar dunaga");
+
+                homeMembers.removeChild(memberRow) // removed from home tab
+
+                updateMembersContainer.removeChild(updateMemberRow) // removed from update tab
+
+                deleteMembersContainer.removeChild(deleteMemberRow) // removed from delete tab
+
+                localStorage.removeItem(userId)
+                
+            })
+
+
+            //! adding user in delete tab
 
 
 
